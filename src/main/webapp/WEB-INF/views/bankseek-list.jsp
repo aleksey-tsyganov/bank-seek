@@ -21,7 +21,7 @@
 
         <div id="content">
             <form:form action="search" method="GET">
-                <input type="text" name="keyword" placeholder="Введите Код территории">
+                <input type="text" name="keyword" placeholder="Код территории/БИК/Код типа участника">
                 <button type="submit" value="Поиск">Поиск</button>
             </form:form>
 

@@ -4,11 +4,13 @@ import application.entity.BankSeek;
 import application.service.BankSeekService;
 import application.utils.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -49,15 +51,21 @@ public class BankSeekController {
     public String saveBankSeek(@Valid @ModelAttribute("bankseek") BankSeek bankSeek, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("bankSeek", bankSeek);
-            model.addAttribute("message", "Не все поля заполнены. Обязательными являются поля, обозначенные *. " +
-                    "Поле БИК должно быть уникальным");
+            model.addAttribute("message", "Не все поля заполнены. Обязательными являются поля, обозначенные *");
             return "add-data-form";
         }
 
         if (bankSeek.getVkey().equals("")) {
             bankSeek.setVkey(AppUtils.generateVkey());
         }
-        bankSeekService.saveBankSeek(bankSeek);
+        try {
+            bankSeekService.saveBankSeek(bankSeek);
+        }
+        catch (DataIntegrityViolationException err) {
+            model.addAttribute("bankSeek", bankSeek);
+            model.addAttribute("message", "Поле БИК должно быть уникальным");
+            return "add-data-form";
+        }
         return "redirect:/bnkseek/list";
     }
 

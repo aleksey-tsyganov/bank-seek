@@ -23,11 +23,12 @@ public class BankSeekDAOImpl implements BankSeekDAO {
         return bankSeekQuery.list().isEmpty();
     }
 
-    //TODO Расширить возможности поиска, для поиска по PZN, RGN
     @Override
     public List<BankSeek> findByKeyword(String keyword) {
         Session session = sessionFactory.getCurrentSession();
-        Query<BankSeek> bankSeekQuery = session.createQuery("FROM BankSeek WHERE rgn=:keyword");
+        Query<BankSeek> bankSeekQuery = session.createQuery("FROM BankSeek bs WHERE bs.rgn LIKE  '%' || :keyword || '%'" +
+                                                                    "OR bs.newnum LIKE '%' || :keyword || '%' " +
+                                                                    "OR bs.pzn LIKE '%' || :keyword || '%'");
         bankSeekQuery.setParameter("keyword", keyword);
         return bankSeekQuery.getResultList();
     }
@@ -35,7 +36,7 @@ public class BankSeekDAOImpl implements BankSeekDAO {
     @Override
     public List<BankSeek> getBankSeek() {
         Session session = sessionFactory.getCurrentSession();
-        Query<BankSeek> bankSeekQuery = session.createQuery("FROM BankSeek", BankSeek.class);
+        Query<BankSeek> bankSeekQuery = session.createQuery("FROM BankSeek", BankSeek.class).setMaxResults(20);
         return bankSeekQuery.getResultList();
     }
 

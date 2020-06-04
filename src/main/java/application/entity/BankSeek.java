@@ -11,7 +11,8 @@ import java.util.Date;
 
 //TODO Добавить возможность выбор значений из выпадающего списка для полей PZN, TNP, UER,REG
 //TODO Добавить текстовые пояснения для полей PZN, TNP, UER,REG
-//TODO Доработать @UniqueKey валидатор для проверки уникальности поля NEWNUM
+//TODO Доработать @UniqueKey валидатор.
+//TODO Добавить поиск по выпадающему списку для PZN
 
 @Getter
 @Setter
