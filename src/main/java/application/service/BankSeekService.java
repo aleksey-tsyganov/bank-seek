@@ -17,4 +17,6 @@ public interface BankSeekService {
     BankSeek getBank(String vkey);
 
     List<BankSeek> findByKeyword(String keyword);
+
+    List<BankSeek> findBankByPzn(String keyword);
 }

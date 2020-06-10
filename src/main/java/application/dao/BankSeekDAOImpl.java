@@ -26,9 +26,16 @@ public class BankSeekDAOImpl implements BankSeekDAO {
     @Override
     public List<BankSeek> findByKeyword(String keyword) {
         Session session = sessionFactory.getCurrentSession();
-        Query<BankSeek> bankSeekQuery = session.createQuery("FROM BankSeek bs WHERE bs.rgn LIKE  '%' || :keyword || '%'" +
-                                                                    "OR bs.newnum LIKE '%' || :keyword || '%' " +
-                                                                    "OR bs.pzn LIKE '%' || :keyword || '%'");
+        Query<BankSeek> bankSeekQuery = session.createQuery("FROM BankSeek bs WHERE bs.rgn LIKE '%' || :keyword || '%'" +
+                                                                    "OR bs.newnum LIKE '%' || :keyword || '%'");
+        bankSeekQuery.setParameter("keyword", keyword);
+        return bankSeekQuery.getResultList();
+    }
+
+    @Override
+    public List<BankSeek> findBankByPzn(String keyword) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<BankSeek> bankSeekQuery = session.createQuery("FROM BankSeek bs WHERE bs.pzn=:keyword");
         bankSeekQuery.setParameter("keyword", keyword);
         return bankSeekQuery.getResultList();
     }

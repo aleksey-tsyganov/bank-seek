@@ -18,4 +18,7 @@ public interface BankSeekDAO {
 
     BankSeek getBank(String vkey);
 
+    List<BankSeek> findBankByPzn(String keyword);
+
+
 }

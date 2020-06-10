@@ -23,10 +23,4 @@ public class Reg {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "center")
-    private String center;
-
-    @Column(name = "namet")
-    private String namet;
-
 }

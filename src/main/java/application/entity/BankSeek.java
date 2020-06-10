@@ -5,14 +5,12 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-
-//TODO Добавить возможность выбор значений из выпадающего списка для полей PZN, TNP, UER,REG
-//TODO Добавить текстовые пояснения для полей PZN, TNP, UER,REG
 //TODO Доработать @UniqueKey валидатор.
-//TODO Добавить поиск по выпадающему списку для PZN
+//TODO Добавить текстовые пояснения для полей PZN, TNP, UER,REG
 
 @Getter
 @Setter
@@ -34,10 +32,12 @@ public class BankSeek {
     private String pzn;
 
     @NotNull
+    @NotBlank
     @Column(name = "uer")
     private String uer;
 
     @NotNull
+    @NotBlank
     @Column(name = "rgn")
     private String rgn;
 
@@ -57,14 +57,17 @@ public class BankSeek {
     private String rkc;
 
     @NotNull
+    @NotBlank
     @Column(name = "namep")
     private String namep;
 
     @NotNull
+    @NotBlank
     @Column(name = "namen")
     private String namen;
 
     @NotNull
+    @NotBlank
     @Column(name = "newnum")
     private String newnum;
 
@@ -75,6 +78,7 @@ public class BankSeek {
     private String permfo;
 
     @NotNull
+    @NotBlank
     @Column(name = "srok")
     private String srok;
 

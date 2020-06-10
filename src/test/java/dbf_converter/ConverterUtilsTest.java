@@ -34,6 +34,5 @@ public class ConverterUtilsTest {
         String falseKey = "qwe";
         assertTrue(ConverterUtils.checkKey(trueKey));
         assertFalse(ConverterUtils.checkKey(falseKey));
-
     }
 }

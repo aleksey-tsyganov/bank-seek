@@ -35,15 +35,31 @@
 			${message}
 			<table>
 				<tbody>
+
 				<tr>
 					<td><label>Код типа участника*:</label></td>
-					<td><form:input path="uer" /></td>
-				</tr>
+					<td>
+						<form:select path="uer">
+							<form:option value="" label="--- Select ---" />
+							<c:forEach var="uer" items="${uerList}">
+								<form:option value="${uer.uerUer}"/>
+							</c:forEach>
+						</form:select>
+					</td>
+				<tr>
 
 				<tr>
 					<td><label>Код территории РФ*:</label></td>
-					<td><form:input path="rgn" /></td>
+					<td>
+						<form:select path="rgn">
+							<form:option value="" label="--- Select ---" />
+							<c:forEach var="reg" items="${regList}">
+								<form:option value="${reg.regRgn}"/>
+							</c:forEach>
+						</form:select>
+					</td>
 				<tr>
+
 				<tr>
 					<td><label>Наименование участника*:</label></td>
 					<td><form:input path="namep" /></td>
@@ -80,18 +96,36 @@
 					<td><label>Код контроля:</label></td>
 					<td><form:input path="real" /></td>
 				</tr>
+
 				<tr>
 					<td><label>Код типа участника:</label></td>
-					<td><form:input path="pzn" /></td>
+					<td>
+						<form:select path="pzn">
+							<form:option value="" label="--- Select ---" />
+							<c:forEach var="pzn" items="${pznList}">
+								<form:option value="${pzn.pznPzn}"/>
+							</c:forEach>
+						</form:select>
+					</td>
 				</tr>
+
 				<tr>
 					<td><label>Индекс:</label></td>
 					<td><form:input path="ind" /></td>
 				</tr>
+
 				<tr>
 					<td><label>Код типа населенного пункта:</label></td>
-					<td><form:input path="tnp" /></td>
+					<td>
+						<form:select path="tnp">
+							<form:option value="" label="--- Select ---" />
+							<c:forEach var="tnp" items="${tnpList}">
+								<form:option value="${tnp.tnpTnp}" onmouseover="${tnp.fullName}"/>
+							</c:forEach>
+						</form:select>
+					</td>
 				</tr>
+
 				<tr>
 					<td><label>Населенный пункт:</label></td>
 					<td><form:input path="nnp" /></td>
@@ -125,7 +159,7 @@
 		
 		
 		</form:form>
-	
+
 		<div style="clear; both;"></div>
 		
 		<p>

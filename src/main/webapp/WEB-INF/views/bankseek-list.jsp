@@ -2,6 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.*"%>
+<%@ page import="application.entity.BankSeek" %>
+
 
 <html>
 <head>
@@ -21,9 +24,28 @@
 
         <div id="content">
             <form:form action="search" method="GET">
-                <input type="text" name="keyword" placeholder="Код территории/БИК/Код типа участника">
+                <input type="text" name="keyword" placeholder="Введите Код территории/БИК">
                 <button type="submit" value="Поиск">Поиск</button>
             </form:form>
+
+            <%
+                List<BankSeek> bankSeekList = (List) request.getAttribute("bankSeekList");
+                Set<String> pznSet = new TreeSet<>();
+                for (BankSeek bs: bankSeekList) {
+                    pznSet.add(bs.getPzn());
+                }
+            %>
+
+            <form action="${pageContext.request.contextPath}/bnkseek/searchPzn" method="GET">
+                <select name="pzn">
+                    <option value="ALL" label="Выберите Код типа участника">Выберите Код типа участника</option>
+                    <option value="ALL" label="Показать всех">Показать всех участников</option>
+                    <c:forEach var="pzn" items="<%=pznSet%>">
+                        <option value="${pzn}">${pzn}</option>
+                    </c:forEach>
+                </select>
+                <button type="submit" value="Поиск">Поиск</button>
+            </form>
 
             <input type="button" value="Добавить информацию"
                    onclick="window.location.href='showAddForm'; return false;"

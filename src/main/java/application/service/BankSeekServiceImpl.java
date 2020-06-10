@@ -26,6 +26,12 @@ public class BankSeekServiceImpl implements BankSeekService{
 
     @Override
     @Transactional
+    public List<BankSeek> findBankByPzn(String keyword) {
+        return bankSeekDAO.findBankByPzn(keyword);
+    }
+
+    @Override
+    @Transactional
     public List<BankSeek> getBanksList() {
         return bankSeekDAO.getBankSeek();
     }
